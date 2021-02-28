@@ -35,6 +35,8 @@ text_clf_svc = text_clf_svc.fit(train_x, train_y)
 predicted = text_clf_svc.predict(test_x)
 print('accuracy on test data = ', np.mean(predicted == test_y))
 
+predicted_svc = text_clf_svc.predict(x_test)
+pred_test = le.inverse_transform(predicted_svc)
 output = pd.DataFrame({'Id': test.Id,
                        'Category': pred_test})
 output.to_csv('submission.csv', index=False)
