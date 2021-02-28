@@ -28,7 +28,9 @@ text_clf_svc = Pipeline([('vect', CountVectorizer(ngram_range=(1, 2))),
                      ('clf-svm', LinearSVC(C=0.5, multi_class="crammer_singer", max_iter=5000)),
 ])
 
-text_clf_svc = text_clf_svc.fit(x_train, Y)
+train_x, test_x, train_y, test_y = train_test_split(x_train, Y, test_size = 0.2, random_state=42) 
+
+text_clf_svc = text_clf_svc.fit(train_x, train_y)
 
 predicted = text_clf_svc.predict(test_x)
 print('accuracy on test data = ', np.mean(predicted == test_y))
